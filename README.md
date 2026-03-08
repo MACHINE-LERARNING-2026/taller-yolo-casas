@@ -2,24 +2,25 @@
 
 Contenido:
 
-- Descripción
-- Estructura del Proyecto
-- Requisitos
-	- 3.1 Instalación de PyTorch / CUDA
-	- 3.2 Instalación de Librerías
-- Descarga del repositorio
-	- 4.1 Clonar/Descargar el repositorio
-	- 4.2 Descargar como .zip
-- Ejecución
-- Uso del Sistema
-- Preprocesamiento Implementado
-- Consideraciones
-- Descripción del dataset y origen de imágenes
-- Instrucciones para reproducir el entrenamiento y la inferencia
-- Resultados (métricas) y ejemplos — (plantilla para completar)
-- Limitaciones y pasos futuros recomendados
+1. Descripción
+2. Estructura del Proyecto
+3. Requisitos
+	3.1. Instalación de PyTorch / CUDA
+	3.2. Instalación de Librerías
+	3.3. Notas sobre certificados (macOS)
+4. Descarga del repositorio
+	4.1. Clonar/Descargar el repositorio
+	4.2. Descargar como .zip
+5. Ejecución
+6. Uso del Sistema
+7. Preprocesamiento Implementado
+8. Consideraciones
+9. Descripción del dataset y origen de imágenes
+10. Instrucciones para reproducir el entrenamiento y la inferencia
+11. Resultados (métricas) y ejemplos — (plantilla para completar)
+12. Limitaciones y pasos futuros recomendados
 
-Descripción
+1. Descripción
 Este proyecto implementa un pipeline para detección de casas usando YOLO (Ultralytics YOLOv8) con arquitectura modular en Python.
 
 El sistema permite:
@@ -32,7 +33,7 @@ Formatos de imagen soportados:
 
 Los comandos en este README se muestran con `python` / `pip`. Si en tu entorno el intérprete es `python3` / `pip3`, sustitúyelos según corresponda.
 
-Estructura del Proyecto
+2. Estructura del Proyecto
 ```
 taller-yolo-casas/
 ├── data.yaml               # Descriptor del dataset (rutas train/val/test, nc, names)
@@ -50,7 +51,7 @@ taller-yolo-casas/
 └── README.md
 ```
 
-Requisitos
+3. Requisitos
 Para el correcto funcionamiento se recomienda:
 - Python 3.9 o superior
 - `pip` actualizado
@@ -85,7 +86,8 @@ Si usas macOS y encuentras problemas SSL con algunas librerías, instala los cer
 /Applications/Python\ 3.x/Install\ Certificates.command
 ```
 
-Descarga del repositorio
+4. Descarga del repositorio
+
 4.1 Clonar/Descargar el repositorio
 
 ```bash
@@ -101,9 +103,9 @@ Desde la interfaz web del repositorio descarga el ZIP, descomprímelo y entra en
 cd taller-yolo-casas
 ```
 
-Ejecución
+5. Ejecución
 
-1) Crear y activar un entorno virtual
+5.1. Crear y activar un entorno virtual
 
 ```bash
 python -m venv venv
@@ -114,7 +116,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-2) Entrenamiento (modo sencillo)
+5.2. Entrenamiento (modo sencillo)
 
 ```bash
 # Ejecuta el script de entrenamiento
