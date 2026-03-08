@@ -134,10 +134,8 @@ posterior a la confirmación de la ejecución se debe abrir la URL `http://127.0
 
 ejemplo de POST:
 - Despliega el metodo POST /detectar_casas y dar click en Try it out, posteriormente oprimir el boton de seleccionar archivo y seleccionar la imagen a la que se le quiere realizar la detección. El resultado puede ser similar a este:
+<img width="1692" height="953" alt="Casa93" src="https://github.com/user-attachments/assets/29247730-3282-4567-bce7-51a35f1fed37" />
 
-<p align="center">
-  <img src="https://uredu-my.sharepoint.com/:i:/g/personal/fabian_aldana_urosario_edu_co/IQCUvY-FxBsvRKmpmvJGEycVAfXPA3IpcCYhMSEpgP6Pa64?e=FsNDoZ"/>
-</p>
 -------------------------------------------------------------------------------------
 6. Resultados (métricas) y ejemplos de detección
 
@@ -177,5 +175,6 @@ Ejemplos (añade rutas o enlaces a imágenes anotadas):
 ---
 
 Fecha de actualización: Marzo 2026
+
 
 
