@@ -1,5 +1,4 @@
 --------------------------------Detector de Casas (YOLO)------------------------------
-
 Contenido:
 
 1. Descripción
@@ -14,7 +13,7 @@ Contenido:
 	5.3. Iniciar servicios de FastAPI
 6. Resultados (métricas) y ejemplos
 7. Limitaciones y pasos futuros recomendados
-
+--------------------------------------------------------------------------------------
 1. Descripción
 Este proyecto implementa un API para detección de casas usando YOLO (Ultralytics YOLOv8) con arquitectura modular en Python.
 
