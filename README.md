@@ -5,152 +5,29 @@ Contenido:
 1. Descripción
 2. Estructura del Proyecto
 3. Requisitos
-	3.1. Instalación de PyTorch / CUDA
-	3.2. Instalación de Librerías
-	3.3. Notas sobre certificados (macOS)
 4. Descarga del repositorio
 	4.1. Clonar/Descargar el repositorio
 	4.2. Descargar como .zip
 5. Ejecución
-6. Uso del Sistema
-7. Preprocesamiento Implementado
-8. Consideraciones
-9. Descripción del dataset y origen de imágenes
-10. Instrucciones para reproducir el entrenamiento y la inferencia
-11. Resultados (métricas) y ejemplos — (plantilla para completar)
-12. Limitaciones y pasos futuros recomendados
+	5.1. Crear y activar un entorno virtual
+	5.2. Entrenamiento (opcional)
+	5.3. Iniciar servicios de FastAPI
+6. Resultados (métricas) y ejemplos
+7. Limitaciones y pasos futuros recomendados
 
 1. Descripción
-Este proyecto implementa un pipeline para detección de casas usando YOLO (Ultralytics YOLOv8) con arquitectura modular en Python.
+Este proyecto implementa un API para detección de casas usando YOLO (Ultralytics YOLOv8) con arquitectura modular en Python.
 
 El sistema permite:
-- Entrenar un detector sobre un dataset personalizado (formato YOLO). 
-- Realizar inferencia local mediante un servicio HTTP (FastAPI) o por línea de comandos.
-- Guardar pesos finales en `models/house-yolo.pt`.
+- Entrenar un modelo de detección de casas sobre un dataset personalizado y parametrizado con Roboflow. 
+- Ejecutar un analisis de imagenes con la finalidad de detectar casas mediante un servicio HTTP (FastAPI).
 
 Formatos de imagen soportados:
-- .png, .jpg, .jpeg, .tiff, .bmp
+- .png, .jpeg, .webp, .bmp
 
-Los comandos en este README se muestran con `python` / `pip`. Si en tu entorno el intérprete es `python3` / `pip3`, sustitúyelos según corresponda.
+Nota: Los comandos en este README se muestran con `python` / `pip`. Si en tu entorno el intérprete es `python3` / `pip3`, sustitúyelos según corresponda.
 
 2. Estructura del Proyecto
-```
-taller-yolo-casas/
-├── data.yaml               # Descriptor del dataset (rutas train/val/test, nc, names)
-├── src/
-│   ├── train_yolo.py       # Script de entrenamiento
-│   ├── inferencia.py       # Servicio FastAPI para inferencia
-│   └── utils.py            # Funciones utilitarias (IO, dibujo, parseo de resultados)
-├── models/
-│   └── detect/             # Carpeta que genera Ultralytics durante el training
-│       └── weights/
-│           └── best.pt
-├── train/                  # Imágenes y etiquetas de entrenamiento (YOLO txt)
-├── valid/                  # Validación
-├── requirements.txt
-└── README.md
-```
-
-3. Requisitos
-Para el correcto funcionamiento se recomienda:
-- Python 3.9 o superior
-- `pip` actualizado
-- GPU opcional (para entrenar más rápido): CUDA y versión de `torch` compatible
-
-Verifica la versión de Python:
-
-```bash
-python --version
-```
-
-3.1. Instalación de PyTorch / CUDA
-Visita https://pytorch.org/ y elige la instalación adecuada según tu sistema operativo y versión de CUDA. Ejemplo (Windows/Linux, CPU):
-
-```bash
-pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
-```
-
-Para GPU, sigue las instrucciones de la web oficial para instalar la build de `torch` compatible con tu versión de CUDA.
-
-3.2. Instalación de Librerías
-Instala las dependencias listadas en `requirements.txt`:
-
-```bash
-pip install -r requirements.txt
-```
-
-3.3. Notas sobre certificados (macOS)
-Si usas macOS y encuentras problemas SSL con algunas librerías, instala los certificados del sistema Python si aplica:
-
-```bash
-/Applications/Python\ 3.x/Install\ Certificates.command
-```
-
-4. Descarga del repositorio
-
-4.1 Clonar/Descargar el repositorio
-
-```bash
-git clone <repo_url>
-cd taller-yolo-casas
-```
-
-4.2 Descargar como .zip
-
-Desde la interfaz web del repositorio descarga el ZIP, descomprímelo y entra en la carpeta:
-
-```bash
-cd taller-yolo-casas
-```
-
-5. Ejecución
-
-5.1. Crear y activar un entorno virtual
-
-```bash
-python -m venv venv
-# Windows
-venv\Scripts\activate
-# macOS / Linux
-source venv/bin/activate
-pip install -r requirements.txt
-```
-
-5.2. Entrenamiento (modo sencillo)
-
-```bash
-# Ejecuta el script de entrenamiento
-python src/train_yolo.py
-```
-
-El script guarda los resultados en `models/detect/weights/best.pt` y copia `best.pt` a `models/house-yolo.pt`.
-
-3) Inferencia con FastAPI
-
-```bash
-uvicorn src.inferencia:app --reload
-```
-
-Abre `http://127.0.0.1:8000/docs` para la documentación interactiva si el servidor está configurado.
-
-Uso del Sistema
-Al ejecutar la API o la inferencia CLI puedes:
-- Enviar una imagen al endpoint `POST /detectar_casas` (campo `archivo`) y descargar la imagen anotada.
-- Ejecutar inferencia directa con Ultralytics:
-
-```bash
-python -c "from ultralytics import YOLO; YOLO('models/house-yolo.pt').predict(source='ruta/imagen.jpg', save=True, imgsz=640)"
-```
-
-Preprocesamiento Implementado
-Dependiendo de la implementación en `src/utils.py`, el pipeline puede aplicar:
-- Redimensionamiento / normalización
-- Data augmentation (durante training): flips, rotaciones, cambios de brillo/contraste
-- Filtrado / limpieza de anotaciones
-
-Consideraciones
-- En la primera ejecución, Ultralytics puede descargar pesos preentrenados (p. ej. `yolov8n.pt`) en tu directorio de trabajo. Para evitar tener ese archivo en la raíz, coloca tus pesos base en `models/weights/` y ajusta `MODEL_BASE` en `src/train_yolo.py`.
-- Si `uvicorn` o instalación fallan revisa que el `venv` esté activado.
 
 Descripción del dataset y origen de imágenes
 - Archivo descriptor: `data.yaml` (contiene rutas a `train`, `val`, `test` y el número de clases `nc`).
@@ -161,16 +38,110 @@ Descripción del dataset y origen de imágenes
 	- `valid/images`, `valid/labels`
 	- `test/images`, `test/labels`
 
-Instrucciones para reproducir el entrenamiento y la inferencia
-1) Asegura que `data.yaml` apunte a las rutas correctas.
-2) Ajusta parámetros en `src/train_yolo.py` o expón argumentos CLI (opcional): `MODEL_BASE`, `EPOCHS`, `BATCH_SIZE`, `IMG_SIZE`.
-3) Ejecuta:
+```
+taller-yolo-casas/
+├── data.yaml               # Descriptor del dataset (rutas train/val/test, nc, names)
+├── src/
+│   ├── train_yolo.py       # Script de entrenamiento
+│   ├── inferencia.py       # Servicio FastAPI para inferencia
+│   └── utils.py            # Funciones utilitarias (Dibujar Conteo Umbral, Dibuja bounding boxes, parseo de resultados, etc.)
+├── models/
+│   └── detect/             # Carpeta que genera Ultralytics durante el training y contiene la matriz de confusion y resultados de entrenamiento
+│   └── weights/		    # contiene los pesos preentrenados de yolov8m
+│   └── house-yolo.pt		# Resultado de pesos del entrenamiento que seran usados por la API
+├── train/                  # Imágenes y etiquetas de entrenamiento generadas por Roboflow
+├── valid/                  # Imágenes y etiquetas de validación generadas por Roboflow
+├── requirements.txt		# Dependencias y librerias necesarias para la aplicación
+└── README.md				# Descripción del repositorio
+```
+
+3. Requisitos
+Para el correcto funcionamiento del proyecto es necesario:
+- Python 3.9 o superior
+- `pip` actualizado
+- GPU opcional (para entrenar más rápido)
+
+para validar la versión de Python usa el siguiente comando:
 
 ```bash
+python --version
+```
+Nota: Para GPU, sigue las instrucciones de la web oficial para instalar la build de `torch` compatible con tu versión de CUDA.
+
+4. Descarga del repositorio
+
+4.1 Clonar/Descargar el repositorio
+
+```bash
+git clone https://github.com/MACHINE-LERARNING-2026/taller-yolo-casas.git
+cd taller-yolo-casas
+```
+
+4.2 Descargar como .zip
+
+Desde la interfaz web del repositorio https://github.com/MACHINE-LERARNING-2026/taller-yolo-casas.git descarga el ZIP, descomprímelo y entra en la carpeta:
+
+```bash
+cd taller-yolo-casas
+```
+
+5. Ejecución
+
+5.1. Crear y activar un entorno virtual
+
+Para windows se utiliza el siguiente comando desde un CMD y ubicarse sobre la ruta del repositorio (taller-yolo-casas):
+```bash
+# Windows
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+Para macOS o Linux se utiliza el siguiente comando desde la terminal y ubicarse sobre la ruta del repositorio (taller-yolo-casas):
+```bash
+# macOS / Linux
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+Si usas macOS y encuentras problemas SSL con algunas librerías, instala los certificados del sistema Python si aplica:
+
+```bash
+/Applications/Python\ 3.x/Install\ Certificates.command
+```
+Nota: Si `uvicorn` o instalación fallan revisa que el `venv` esté activado.
+
+5.2. Entrenamiento (opcional)
+El repositorio ya cuenta los pesos entrenados y estan ubicados en: /models/house-yolo.pt por lo cual no es necesario realizar nuevamente un entrenamiento para usar la API, por lo cual este proceso de entrenamiento es totalmente opcional.
+
+```bash
+# Ejecuta el script de entrenamiento
 python src/train_yolo.py
 ```
 
-4) Para validar y obtener métricas con Ultralytics:
+El script guarda los resultados en `models/detect/weights/best.pt` y copia `best.pt` a `models/house-yolo.pt`.
+
+5.3. Iniciar servicios de FastAPI
+
+desde un cmd de windows y ubicados sobre la raiz del repositorio se debe ejecutar el siguiente comando:
+
+```bash
+uvicorn src.inferencia:app --reload
+```
+posterior a la confirmación de la ejecución se debe abrir la URL `http://127.0.0.1:8000/docs` desde tu navegador de preferencia. Esta URL tiene los siguientes metodos permitidos de la API:
+- GET / 					Información de la API
+- POST /detectar_casas 		Recibe una imagen y devuelve otra imagen con las detecciones de casas realizadas
+
+ejemplo de POST:
+- Despliega el metodo POST /detectar_casas y dar click en Try it out, posteriormente oprimir el boton de seleccionar archivo y seleccionar la imagen a la que se le quiere realizar la detección. El resultado puede ser similar a este:
+
+<p align="center">
+  <img src="https://uredu-my.sharepoint.com/:i:/g/personal/fabian_aldana_urosario_edu_co/IQCUvY-FxBsvRKmpmvJGEycVAfXPA3IpcCYhMSEpgP6Pa64?e=FsNDoZ"/>
+</p>
+
+6. Resultados (métricas) y ejemplos de detección
+
+Para validar y obtener métricas con Ultralytics:
 
 ```python
 from ultralytics import YOLO
@@ -179,8 +150,7 @@ metrics = model.val(data='data.yaml')
 print(metrics)
 ```
 
-Resultados (métricas) y ejemplos de detección
--- Esta sección la puedes completar con tus métricas y ejemplos.
+Para el entranamiento realizado, se obtuvieron las siguientes metricas:
 
 - Dataset: número total de imágenes, splits (train/val/test), resolución media — __
 - mAP@0.5: __
@@ -192,16 +162,8 @@ Ejemplos (añade rutas o enlaces a imágenes anotadas):
 - Falsos positivos: `examples/errors/false_positives/` — __
 - Falsos negativos: `examples/errors/false_negatives/` — __
 
-Instrucciones rápidas para generar imágenes anotadas:
 
-```python
-from ultralytics import YOLO
-model = YOLO('models/house-yolo.pt')
-model.predict(source='examples/raw/imagen.jpg', imgsz=640, conf=0.25, save=True)
-# Resultado en runs/predict/<timestamp>/imagen.jpg
-```
-
-Limitaciones y pasos futuros recomendados
+7. Limitaciones y pasos futuros recomendados
 - Si el dataset es pequeño existe riesgo de sobreajuste. Recomendaciones:
 	- Aumentar datos (augmentations): rotaciones, flips, variaciones de brillo/contraste.
 	- Recolectar más imágenes en distintas condiciones (iluminación, ángulos, entornos).
@@ -212,15 +174,8 @@ Limitaciones y pasos futuros recomendados
 	- En producción, ejecutar Uvicorn sin `--reload` y orquestar con systemd/Docker/Gunicorn.
 	- Añadir tests automáticos y CI que verifique endpoints y una inferencia mínima.
 
-Cómo contribuir
-- Si quieres, puedo añadir:
-	- Scripts para generar reportes de métricas automáticamente.
-	- Notebooks con visualización de curvas de entrenamiento.
-	- Ejemplos curl/PowerShell más detallados.
-
 ---
-Fecha de actualización: marzo 2026
 
-prueba
+Fecha de actualización: Marzo 2026
 
 
