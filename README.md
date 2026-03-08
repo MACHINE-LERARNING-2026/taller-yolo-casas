@@ -1,4 +1,5 @@
 --------------------------------Detector de Casas (YOLO)------------------------------
+-------------------------------------------------------------------------------------
 Contenido:
 
 1. Descripción
@@ -25,7 +26,7 @@ Formatos de imagen soportados:
 - .png, .jpeg, .webp, .bmp
 
 Nota: Los comandos en este README se muestran con `python` / `pip`. Si en tu entorno el intérprete es `python3` / `pip3`, sustitúyelos según corresponda.
-
+-------------------------------------------------------------------------------------
 2. Estructura del Proyecto
 
 Descripción del dataset y origen de imágenes
@@ -53,7 +54,7 @@ taller-yolo-casas/
 ├── requirements.txt		# Dependencias y librerias necesarias para la aplicación
 └── README.md				# Descripción del repositorio
 ```
-
+-------------------------------------------------------------------------------------
 3. Requisitos
 Para el correcto funcionamiento del proyecto es necesario:
 - Python 3.9 o superior
@@ -66,7 +67,7 @@ para validar la versión de Python usa el siguiente comando:
 python --version
 ```
 Nota: Para GPU, sigue las instrucciones de la web oficial para instalar la build de `torch` compatible con tu versión de CUDA.
-
+-------------------------------------------------------------------------------------
 4. Descarga del repositorio
 
 4.1 Clonar/Descargar el repositorio
@@ -83,7 +84,7 @@ Desde la interfaz web del repositorio https://github.com/MACHINE-LERARNING-2026/
 ```bash
 cd taller-yolo-casas
 ```
-
+-------------------------------------------------------------------------------------
 5. Ejecución
 
 5.1. Crear y activar un entorno virtual
@@ -137,7 +138,7 @@ ejemplo de POST:
 <p align="center">
   <img src="https://uredu-my.sharepoint.com/:i:/g/personal/fabian_aldana_urosario_edu_co/IQCUvY-FxBsvRKmpmvJGEycVAfXPA3IpcCYhMSEpgP6Pa64?e=FsNDoZ"/>
 </p>
-
+-------------------------------------------------------------------------------------
 6. Resultados (métricas) y ejemplos de detección
 
 Para validar y obtener métricas con Ultralytics:
@@ -161,7 +162,7 @@ Ejemplos (añade rutas o enlaces a imágenes anotadas):
 - Falsos positivos: `examples/errors/false_positives/` — __
 - Falsos negativos: `examples/errors/false_negatives/` — __
 
-
+-------------------------------------------------------------------------------------
 7. Limitaciones y pasos futuros recomendados
 - Si el dataset es pequeño existe riesgo de sobreajuste. Recomendaciones:
 	- Aumentar datos (augmentations): rotaciones, flips, variaciones de brillo/contraste.
