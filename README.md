@@ -165,7 +165,7 @@ El modelo detecta aproximadamente el 47% de todas las casas reales presentes en 
 
 Ejemplos (añade rutas o enlaces a imágenes anotadas):
 
-<img width="3000" height="2250" alt="confusion_matrix_normalized" src="https://github.com/user-attachments/assets/c8791c5d-3503-4710-9a3c-cd5216304b3d" />
+<img width="3000" height="2250" alt="confusion_matrix" src="https://github.com/user-attachments/assets/5a2ec5d8-4843-4993-a6d6-b582ca1072a8" />
 
 Un ejemplo de detección de falso positivos es el siguiente:
 
@@ -187,6 +187,7 @@ Un ejemplo de detección de falso positivos es el siguiente:
 ---
 
 Fecha de actualización: Marzo 2026
+
 
 
 
