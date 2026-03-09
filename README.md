@@ -29,15 +29,6 @@ Nota: Los comandos en este README se muestran con `python` / `pip`. Si en tu ent
 -------------------------------------------------------------------------------------
 2. Estructura del Proyecto
 
-Descripción del dataset y origen de imágenes
-- Archivo descriptor: `data.yaml` (contiene rutas a `train`, `val`, `test` y el número de clases `nc`).
-- Clases: `['Casa']` (1 clase) — confirma en `data.yaml`.
-- Origen: dataset exportado desde Roboflow (ver `data.yaml` para detalles del workspace/proyecto/versión).
-- Estructura esperada de carpetas (relativa a la raíz del repo):
-	- `train/images`, `train/labels`
-	- `valid/images`, `valid/labels`
-	- `test/images`, `test/labels`
-
 ```
 taller-yolo-casas/
 ├── data.yaml               # Descriptor del dataset (rutas train/val/test, nc, names)
@@ -54,6 +45,16 @@ taller-yolo-casas/
 ├── requirements.txt		# Dependencias y librerias necesarias para la aplicación
 └── README.md				# Descripción del repositorio
 ```
+
+Descripción del dataset y origen de imágenes
+- Archivo descriptor: `data.yaml` (contiene rutas a `train`, `val`, `test` y el número de clases `nc`).
+- Clases: `['Casa']` (1 clase) — confirma en `data.yaml`.
+- Origen: dataset exportado desde Roboflow (ver `data.yaml` para detalles del workspace/proyecto/versión).
+- Estructura esperada de carpetas (relativa a la raíz del repo):
+	- `train/images`, `train/labels`
+	- `valid/images`, `valid/labels`
+	- `test/images`, `test/labels`
+
 -------------------------------------------------------------------------------------
 3. Requisitos
 Para el correcto funcionamiento del proyecto es necesario:
