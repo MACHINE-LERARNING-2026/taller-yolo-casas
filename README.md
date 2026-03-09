@@ -149,25 +149,31 @@ metrics = model.val(data='data.yaml')
 print(metrics)
 ```
 
-Para el entranamiento realizado, se obtuvieron las siguientes metricas:
+Con el dataset de 139 imagenes divididas en 111 para entramiento y 28 de validación se obtuvieron las siguientes metricas después del entrenamiento:
 
 <img width="2400" height="1200" alt="results" src="https://github.com/user-attachments/assets/0cc71254-0eef-44a8-abdf-526e7c6141d8" />
 
-- Dataset: número total de imágenes 139, splits (train 111 - val 28)
+Los resultados del entrenamiento muestran una disminución progresiva en las funciones de pérdida tanto en entrenamiento como en validación, lo que indica que el modelo está aprendiendo adecuadamente a localizar y clasificar mejor las casas presentes en las imágenes.
+
+Las métricas de evaluación presentan una tendencia creciente a lo largo de las épocas, alcanzando aproximadamente los siguientes valores:
 - mAP@0.5 (Mean Average Precision): 0.5635912229825473
 Esta métrica mide el rendimiento global del modelo considerando precisión y recall al mismo tiempo.
-
 - Precision: 0.6734037212645044
 Aproximadamente 67 de cada 100 detecciones realizadas por el modelo sí corresponden a casas reales. El restante 33% corresponde a falsas detecciones, es decir, el modelo identifica como casa algo que en realidad no lo es.
-
 - Recall: 0.47096774193548385
 El modelo detecta aproximadamente el 47% de todas las casas reales presentes en las imágenes.
 
-Ejemplos (añade rutas o enlaces a imágenes anotadas):
+Esto evidencia una mejora gradual en la capacidad del modelo para detectar casas, aunque todavía existen casos en los que algunos casas reales no son detectadas.
+
+En general, el modelo muestra un comportamiento de aprendizaje estable y sin señales claras de sobreajuste, ya que las pérdidas de validación también disminuyen durante el entrenamiento. No obstante, los resultados sugieren que el desempeño podría mejorarse mediante el uso de más datos de entrenamiento, optimización de anotaciones o ajuste de hiperparámetros en el modelo basado en YOLOv8.
+
+A continuaación, se observa la matriz de confusión obtenida:
 
 <img width="3000" height="2250" alt="confusion_matrix" src="https://github.com/user-attachments/assets/5a2ec5d8-4843-4993-a6d6-b582ca1072a8" />
 
-Un ejemplo de detección de falso positivos es el siguiente:
+En esta matriz se puede apreciar que el modelo logra identificar correctamente 93 instancias de casas, lo que evidencia una capacidad adecuada para reconocer la clase objetivo. Sin embargo, también se observa un número considerable de falsos positivos (94 casos), donde el modelo predice la presencia de una casa cuando en realidad corresponde al fondo de la imagen, lo que indica cierta confusión entre estructuras del entorno y la clase de interés. Asimismo, se registran 62 falsos negativos, es decir, casos en los que el modelo no logra detectar una casa presente y la clasifica como background. En conjunto, estos resultados sugieren que, aunque el modelo presenta un desempeño razonable en la detección de casas, todavía existe margen de mejora en la discriminación entre la clase objetivo y el fondo.
+
+Un ejemplo de detección de falso positivo es el siguiente:
 
 ![ac77c22d-0583-4f4b-a6d1-f030c5f29947](https://github.com/user-attachments/assets/90b5f884-a7ac-46b0-beec-572a2a857617)
 
