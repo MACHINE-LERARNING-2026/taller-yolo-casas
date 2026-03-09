@@ -151,6 +151,8 @@ print(metrics)
 
 Para el entranamiento realizado, se obtuvieron las siguientes metricas:
 
+<img width="2400" height="1200" alt="results" src="https://github.com/user-attachments/assets/0cc71254-0eef-44a8-abdf-526e7c6141d8" />
+
 - Dataset: número total de imágenes 139, splits (train 111 - val 28)
 - mAP@0.5 (Mean Average Precision): 0.5635912229825473
 Esta métrica mide el rendimiento global del modelo considerando precisión y recall al mismo tiempo.
@@ -162,9 +164,12 @@ Aproximadamente 67 de cada 100 detecciones realizadas por el modelo sí correspo
 El modelo detecta aproximadamente el 47% de todas las casas reales presentes en las imágenes.
 
 Ejemplos (añade rutas o enlaces a imágenes anotadas):
-- True positives: `examples/correct/` — __
-- Falsos positivos: `examples/errors/false_positives/` — __
-- Falsos negativos: `examples/errors/false_negatives/` — __
+
+<img width="3000" height="2250" alt="confusion_matrix_normalized" src="https://github.com/user-attachments/assets/c8791c5d-3503-4710-9a3c-cd5216304b3d" />
+
+Un ejemplo de detección de falso positivos es el siguiente:
+
+![ac77c22d-0583-4f4b-a6d1-f030c5f29947](https://github.com/user-attachments/assets/90b5f884-a7ac-46b0-beec-572a2a857617)
 
 -------------------------------------------------------------------------------------
 7. Limitaciones y pasos futuros recomendados
@@ -174,6 +179,7 @@ Ejemplos (añade rutas o enlaces a imágenes anotadas):
 	- Realizar validación cruzada o usar técnicas de regularización.
 	- Evaluar mAP en múltiples umbrales (mAP@[.5:.95]).
 
+
 - Despliegue:
 	- En producción, ejecutar Uvicorn sin `--reload` y orquestar con systemd/Docker/Gunicorn.
 	- Añadir tests automáticos y CI que verifique endpoints y una inferencia mínima.
@@ -181,6 +187,7 @@ Ejemplos (añade rutas o enlaces a imágenes anotadas):
 ---
 
 Fecha de actualización: Marzo 2026
+
 
 
 
