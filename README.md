@@ -151,10 +151,15 @@ print(metrics)
 
 Para el entranamiento realizado, se obtuvieron las siguientes metricas:
 
-- Dataset: número total de imágenes, splits (train/val/test), resolución media — __
-- mAP@0.5: __
-- Precision: __
-- Recall: __
+- Dataset: número total de imágenes 139, splits (train 111 - val 28)
+- mAP@0.5 (Mean Average Precision): 0.5635912229825473
+Esta métrica mide el rendimiento global del modelo considerando precisión y recall al mismo tiempo.
+
+- Precision: 0.6734037212645044
+Aproximadamente 67 de cada 100 detecciones realizadas por el modelo sí corresponden a casas reales. El restante 33% corresponde a falsas detecciones, es decir, el modelo identifica como casa algo que en realidad no lo es.
+
+- Recall: 0.47096774193548385
+El modelo detecta aproximadamente el 47% de todas las casas reales presentes en las imágenes.
 
 Ejemplos (añade rutas o enlaces a imágenes anotadas):
 - True positives: `examples/correct/` — __
